@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}Lesson{% endblock %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href={{url_for('static', filename='css/lesson.css')}}>
+{% endblock %}
+
+{% set lesson = current_user.get_lesson(lesson_id)%}
+{% set percent = current_user.get_percent_of_passed(lesson_id) %}
+{% set passed_tasks = current_user.get_count_passed_task(lesson_id) %}
+{% set all_tasks = lesson.tasks|length %}
+
+{% block container %}
+<div class="lesson-header">
+    <h1 class="font-weight-bold">{{lesson.title}}</h1>
+    <div class="lesson-status">
+        <span>Дедлайн <span class="font-weight-bold">{{moment(lesson.deadline).format('LL')}}</span></span>
+    </div>
+    <div class="lesson-progress">
+        <div class="progress col-4">
+            <div class="progress-bar" style="width: {{percent}}%" aria-valuenow="{{percent}}" aria-valuemin="0" aria-valuemax="100">{{percent}}%</div>
+        </div>
+        <span>{{passed_tasks}}/{{all_tasks}} задач зачтено 10 баллов</span>
+    </div>
+</div>
+<div class="task-list">
+    <h2 class="font-weight-bold">Задачи</h2>
+    <ul class="list-group classwork">
+        <li class="list-group-item">
+            <div class="list-header">
+                <i class="fas fa-user-graduate type-icon class-icon"></i>
+                <h3 class="font-weight-bold">Классная работа</h3>
+            </div>
+        </li>
+        {% for task in lesson.tasks %}
+            {% if task.type == 'Classwork' %}
+                {% if current_user.get_task_status(task.id) == "None"%}
+                    <a class="list-group-item item" href={{url_for('task_page', task_id=task.id)}}>{{task.title}}</a>
+                {% endif %}
+                {% if current_user.get_task_status(task.id) == "Wrong"%}
+                    <a class="list-group-item item-wrong" href={{url_for('task_page', task_id=task.id)}}>{{task.title}}</a>
+                {% endif %}
+                {% if current_user.get_task_status(task.id) == "Right"%}
+                    <a class="list-group-item item-ready" href={{url_for('task_page', task_id=task.id)}}>{{task.title}}</a>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </ul>
+    <ul class="list-group homework">
+        <li class="list-group-item">
+            <div class="list-header">
+                <i class="fas fa-home type-icon home-icon"></i>
+                <h3 class="font-weight-bold">Домашняя работа</h3>
+            </div>
+        </li>
+        {% for task in lesson.tasks %}
+            {% if task.type == 'Homework' %}
+                {% if current_user.get_task_status(task.id) == "None"%}
+                    <a class="list-group-item item" href={{url_for('task_page', task_id=task.id)}}>{{task.title}}</a>
+                {% endif %}
+                {% if current_user.get_task_status(task.id) == "Wrong"%}
+                    <a class="list-group-item item-wrong" href={{url_for('task_page', task_id=task.id)}}>{{task.title}}</a>
+                {% endif %}
+                {% if current_user.get_task_status(task.id) == "Right"%}
+                    <a class="list-group-item item-ready" href={{url_for('task_page', task_id=task.id)}}>{{task.title}}</a>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+{% block script %}
+    <script>
+        $(document).ready(function() {
+            $( ".list-group-item").hover(
+            function() {
+                $(this).addClass('shadow').css('cursor', 'pointer'); 
+            }, function() {
+                $(this).removeClass('shadow');
+            }
+        );
+        });
+    </script>
+    {{ moment.include_moment() }}
+    {{ moment.lang('ru') }}
+{% endblock %}
+

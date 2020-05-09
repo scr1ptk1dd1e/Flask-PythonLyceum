@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href={{url_for('static', filename='css/admin.css')}}>
+    <title>nedoAdmin</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="add-lesson-container form-container col-md-5">
+                <form class="add-lesson-form" action="/add-lesson" method="post">
+                    <h5>Добавить урок</h5>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">Title</span>
+                        </div>
+                        <input class="form-control" type="text" name="title" placeholder="Lesson title">
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">Deadline</span>
+                        </div>
+                        <input class="form-control" type="date" name="deadline" placeholder="Deadline">
+                    </div>
+                    <button type="submit" class="submit-btn">Add</button>
+                </form>
+            </div>
+            
+            <div class="add-task-container form-container col-md-5">
+                <form class="add-task-form" action="/add-task" method="post">
+                    <h5>Добавить задачу</h5>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">Title</span>
+                        </div>
+                        <input class="form-control" type="text" name="title" placeholder="Task title">
+                    </div>
+                    <div class="wrap-input">
+                        <select class="custom-select" name="type">
+                            <option value="Classwork">Классная работа</option>
+                            <option value="Homework">Домашняя работа</option>
+                            <option value="Addwork">Дополнительная работа</option>
+                        </select>
+                    </div>
+                    <div class="wrap-input">
+                        <textarea class="form-control" name="description" placeholder="Description"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Add</button>
+                </form>
+            </div>
+            
+            <div class="add-task-lesson-container form-container col-md-5">
+                <form class="add-task_lesson-form" action="/add-task-lesson" method="post">
+                    <h5>Добавить задачу в урок</h5>
+                    <div class="wrap-input">
+                        <select class="custom-select" name="lesson">
+                            {% for lesson in lessons %}
+                            <option value="{{lesson.id}}">{{lesson}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="wrap-input">
+                        <select class="custom-select" name="task">
+                            {% for task in tasks %}
+                            <option value="{{task.id}}">{{task}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="submit-btn">Add</button>
+                </form>
+            </div>
+    
+            <div class="add-user-lesson-container form-container col-md-5">
+                <form class="add-user-lesson-form" action="/add-user-lesson" method="post">
+                    <h5>Добавить урок в юзера</h5>
+                    <div class="wrap-input">
+                        <select class="custom-select" name="lesson">
+                            {% for lesson in lessons %}
+                            <option value="{{lesson.id}}">{{lesson}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="wrap-input">
+                        <select class="custom-select" name="user">
+                            {% for user in users %}
+                            <option value="{{user.id}}">{{user}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="submit-btn">Add</button>
+                </form>
+            </div>
+            
+            <div class="change-task-status-container form-container col-md-5">
+                <form class="change-task-status-form" action="/change-task-status" method="post">
+                    <h5>Изменить статус задания</h5>
+                    <div class="wrap-input">
+                        <select class="custom-select" name="status">
+                            <option value="None">Обычный</option>
+                            <option value="Right">Решенный</option>
+                            <option value="Wrong">Ошибка</option>
+                        </select>
+                    </div>
+                    <div class="wrap-input">
+                        <select class="custom-select" name="task">
+                            {% for task in tasks %}
+                            <option value="{{task.id}}">{{task}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="wrap-input">
+                        <select class="custom-select" name="user">
+                            {% for user in users %}
+                            <option value="{{user.id}}">{{user}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="submit-btn">Add</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

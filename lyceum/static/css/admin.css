@@ -1,0 +1,16 @@
+.form-container{
+    border: 2px solid #827ffe;
+    border-radius: 5px;
+    margin: 20px;
+    padding: 20px;
+}
+
+.submit-btn{
+    border-radius: 3px;
+    border: none;
+    background-color: #827ffe;
+    color: white;
+    margin-top: 5px;
+    min-width: 100px;
+    min-height: 30px;
+}

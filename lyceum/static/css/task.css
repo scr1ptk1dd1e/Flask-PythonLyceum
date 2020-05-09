@@ -1,0 +1,156 @@
+.task-info span{
+    margin-left: 15px;
+}
+
+.task-container{
+    margin-top: 30px;
+}
+
+.header{
+    margin-bottom: 30px
+}
+
+.task-info{
+    padding-top: 10px;
+}
+
+.chat{
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    width: 100%;
+    height: 500px;
+    border-radius: 10px;
+    border: 1px solid #827ffe;
+}
+
+.chat-header{
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+    padding: 15px;
+    border-bottom: 1px solid #827ffe;
+}
+
+.solution-send-btn{
+    color: #fff;
+    background-color: #827ffe;
+    text-transform: uppercase;
+    width: 80%;
+    height: 50px;
+    border: none;
+    border-radius: 3px;
+}
+
+.solution-send-btn span{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin: 0;
+}
+
+.comments{
+    overflow-y: auto;
+    flex-grow: 1;
+    margin: 0;
+    padding: 10px;
+    list-style-type: none;
+}
+
+.message-form{
+    width: 100%;
+}
+
+.chat-bottom{
+    display: flex;
+    justify-content: center;
+    min-height: 64px;
+    padding: 10px 10px 10px 10px;
+    border-top: 1px solid #827ffe;
+}
+
+.message-input{
+    border: 1.5px solid #827ffe;
+    width: 85%;
+    min-height: 40px;
+    border-radius: 3px;
+}
+
+.message-send-btn{
+    background-color: #827ffe;
+    border: none;
+    border-radius: 3px;
+    min-height: 40px;
+    min-width: 40px;
+    margin-left: 3px
+}
+
+.send-icon{
+    color: white;
+    height: 100%;
+    width: 100%;
+}
+
+.message{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    margin-bottom: 4px;
+}
+
+.message-own{
+    flex-direction: row-reverse;
+    align-self: flex-end;
+}
+
+.message-avatar{
+    max-width: 30px;
+    border-radius: 50%;
+    margin-left: 5px;
+}
+
+.textbox{
+    border: 1px solid #827ffe;
+    border-radius: 3px;
+    color: black;
+    padding: 3px;
+}
+
+.message-text{
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+.solution_input{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    opacity: 0;
+    touch-action: manipulation;
+}
+
+.source-header{
+    width: 100%;
+    height: 60px;
+    border-radius: 20px 20px 0px 0px;
+}
+
+.CodeMirror {
+    height: 440px;
+}
+
+.message-solution > .textbox{
+    background-color: #827ffe;
+    border-radius: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: white;
+}
+
+.message{
+    margin-top: 10px;
+}

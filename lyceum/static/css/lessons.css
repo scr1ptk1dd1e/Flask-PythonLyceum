@@ -1,0 +1,57 @@
+.lessons-dashboard{
+    margin-top: 20px;
+}
+
+.lessons-dashboard a{
+    text-decoration: none;
+    color: black;
+}
+
+.lessons-dashboard span{
+    color: gray;
+}
+
+.lessons-dashboard__content-wrapper{
+    margin-top: 20px;
+}
+
+.lessons-list{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+
+.lessons-list__item{
+    border: 1px solid #cccccc;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+.lesson-card{
+    padding: 15px;
+}
+
+.lessons-header{
+    font-weight: 600;
+}
+
+.lesson-card__lesson{
+    display: inline-block;
+}
+
+.lesson-card__progress{
+    display: block;
+    width: 300px;
+    float: right;
+    padding-top: 8px;
+}
+
+.progress-bar{
+    background-color: #827ffe;
+}
+
+.progress{
+    margin-bottom: 9px;
+    height: 20px;
+}

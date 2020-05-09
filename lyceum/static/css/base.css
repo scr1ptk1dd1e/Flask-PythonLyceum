@@ -1,0 +1,88 @@
+.navbar{
+    border-bottom: 2px solid #827ffe;
+    position: relative;
+    display: block;
+}
+
+.account{
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+    padding: 4px 0 0 15px;
+    margin-right: 10px;
+    height: 55px;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.menu{
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li{
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+}
+
+.menu li i{
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    height: 55px;
+    font-size: 25px;
+    padding: 11px 10px 0 0;
+}
+
+
+.account_image{
+    text-align: left;
+    border-radius: 50%;
+    height: 40px;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: -10px;
+}
+
+.account_button{
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+    font-size: 14px;
+    color: black;
+    font-weight: 500;
+    cursor: pointer;
+    margin: 0 0 0 5px;
+    text-transform: uppercase;
+}
+
+.navbar-right{
+    float: right !important;
+}
+
+.logo{
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+}
+
+.dropdown-toggle::after {
+    width: 13px;
+    height: 6px;
+    color: #827ffe;
+}
+
+.account_button:hover{
+    color: #827ffe;
+}

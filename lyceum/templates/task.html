@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}Task{% endblock %}
+
+{% block stylesheet %}
+    {{ codemirror.include_codemirror() }}
+    <link rel="stylesheet" href={{url_for('static', filename='css/task.css')}}>
+{% endblock %}
+
+{% set task = current_user.get_task(task_id) %}
+{% set status = current_user.get_task_status(task_id) %}
+
+{% block container %}
+    <div class="task-container">
+        <div class="header">
+            <h1 class="font-weight-bold">{{task.title}}</h1>
+            <div class="task-info">
+                <span>Дополнительные задачи 3 уровень</span>
+                <span>макс. 100 балл.</span>
+                <span>Дедлайн: 12 мая 23:30</span>
+            </div>
+        </div>
+        <div class="task-body row">
+            <div class="task-left col-md-8 col-12">
+                <div class="task-description">
+                    {% if not solutions %}
+                        <span>{{task.description}}</span>
+                    {% else %}
+                        {% if status == "None" %}
+                            {% set color = "#a3a3a3;"%}
+                        {% endif %}
+                        {% if status == "Right" %}
+                            {% set color = "#827ffe;"%}
+                        {% endif %}
+                        {% if status == "Wrong" %}
+                            {% set color = "#fe7f7f;"%}
+                        {% endif %}
+                        <style>
+                            .CodeMirror {
+                                border: 1px solid {{color}};
+                            }
+                        </style>
+                        <div class="source-header" style="background-color:{{color}}"></div>
+                        {{ form.source_code }}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="task-right col-md-4 col-12">
+                <div class="chat">
+                    <form class="send_solution-form" id="send_solution-form" action="/send-solution/{{task_id}}" enctype="multipart/form-data" method="post">
+                        <div class="chat-header">
+                            <input type="file" id="solution-file" name="solution" hidden="hidden" />
+                            <button class="solution-send-btn" type="button" id="solution-send">SEND SOLUTION</button>
+                        </div>
+                    </form>
+                    <ul class="comments">
+                        <li class="message message-own">
+                            <img src={{url_for('static', filename='img/avatars/' + current_user.image)}} alt="avatar" class="message-avatar">
+                            <div class="textbox">
+                                <span class="message-text">Здравствуйте, досвидания</span>
+                            </div>
+                        </li>
+                        {% for solution in solutions %}
+                        <li class="message message-own message-solution">
+                            <img src={{url_for('static', filename='img/avatars/' + current_user.image)}} alt="avatar" class="message-avatar">
+                            <div class="textbox">
+                                <span class="message-text">{{solution.file}}</span>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="chat-bottom">
+                        <form class="message-form">
+                            <input type="text" class="message-input">
+                            <button class="message-send-btn">
+                                <i class="far fa-paper-plane send-icon"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        $("#solution-send").click(function() {
+            $("#solution-file").click();
+        });
+        
+        $("#solution-file").change(function() {
+            $("#send_solution-form").submit()
+        });
+    </script>
+{% endblock %}

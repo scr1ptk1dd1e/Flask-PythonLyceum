@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Lessons{% endblock %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href={{url_for('static', filename='css/lessons.css')}}>
+{% endblock %}
+
+{% block container %}
+    <div class="lessons-dashboard">
+        <h3 class="lessons-header">Lessons</h3>
+        <div class="lessons-dashboard__content-wrapper">
+            <ul class="lessons-list" id="lessons-list">
+                {% for lesson in current_user.lessons %}
+                    {% set percent = current_user.get_percent_of_passed(lesson.id) %}
+                    {% set passed_tasks = current_user.get_count_passed_task(lesson.id) %}
+                    <li class='lessons-list__item' style='cursor: pointer;'>
+                        <a href={{url_for('lesson_page', lesson_id=lesson.id)}} class='lessons-list__link'>
+                            <div class='lesson-card'>
+                                <div class='lesson-card__lesson col-6'>
+                                    <h4>{{lesson.title}}</h4>
+                                    <span>{{moment(lesson.deadline).format('LL')}}</span>
+                                </div>
+                                <div class='lesson-card__progress col-6'>
+                                    <div class='progress'>
+                                        <div class='progress-bar' style='width: {{percent}}%' aria-valuenow='{{percent}}' aria-valuemin='0' aria-valuemax='100'>{{percent}}%</div>
+                                    </div>
+                                    <span class='d-none d-sm-block'>{{passed_tasks}}/{{lesson.tasks|length}} задач зачтено</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        $(function(){
+            $(".lessons-list__item").hover(
+            function() {
+                $(this).addClass('shadow').css('cursor', 'pointer'); 
+            }, function() {
+                $(this).removeClass('shadow');
+            }
+        );
+        });
+    </script>
+    {{ moment.include_moment() }}
+    {{ moment.lang('ru') }}
+<!--<script src={{url_for('static', filename='js/main.js')}}></script>-->
+{% endblock %}
